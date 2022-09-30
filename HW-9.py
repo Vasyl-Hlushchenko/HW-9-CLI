@@ -12,17 +12,17 @@ def input_error(handler):
     return wrapper
 
 
-def hello_func():
+def hello_handler():
     print("How can I help you?")
 
 
-def quit_func():
+def quit_handler():
     print("Good bye!")
     quit()
 
 
 @input_error
-def change_contact(var):
+def change_contact_handler(var):
     name = var.split()[1]
     if (var.split()[2]).isdigit():
         phone = var.split()[2]
@@ -30,13 +30,13 @@ def change_contact(var):
     print("Contact was changed")
 
 
-def show_contacts():
+def show_contacts_handler():
     for key, value in CONTACTS.items():
         print(f"{key}: {value}")
 
 
 @input_error
-def add_contact(var):
+def add_contact_handler(var):
     if (var.split()[1]).isalpha():
         name = var.split()[1]
     if (var.split()[2]).isdigit():
@@ -46,17 +46,17 @@ def add_contact(var):
 
 
 @input_error
-def find_contact(var):
+def find_contact_handler(var):
     name = var.split()[1]
     print(f"{name}: {CONTACTS[name]}")
 
 
 COMMANDS = {
-    "hello": hello_func,
-    "show all": show_contacts,
-    "exit": quit_func,
-    "close": quit_func,
-    "good bye": quit_func,
+    "hello": hello_handler,
+    "show all": show_contacts_handler,
+    "exit": quit_handler,
+    "close": quit_handler,
+    "good bye": quit_handler,
 }
 
 
@@ -64,11 +64,11 @@ def main():
     while True:
         var = (input("Enter command: ")).lower()
         if var.startswith('add'):
-            add_contact(var)
+            add_contact_handler(var)
         elif var.startswith('change'):
-            change_contact(var)
+            change_contact_handler(var)
         elif var.startswith('phone'):
-            find_contact(var)
+            find_contact_handler(var)
         elif var not in COMMANDS:
             print("Wrong command!")
             continue
