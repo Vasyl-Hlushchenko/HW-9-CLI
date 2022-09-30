@@ -4,7 +4,7 @@ CONTACTS = {}
 def input_error(handler):
     def wrapper(*args, **kwargs):
         try:
-            res = handler(*args, **kwargs)
+            handler(*args, **kwargs)
         except (ValueError, IndexError, UnboundLocalError):
             print("Error. Give me correct name and phone, please")
         except KeyError:
